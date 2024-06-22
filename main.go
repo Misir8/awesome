@@ -4,6 +4,7 @@ import (
 	"example.com/awesome/database"
 	"example.com/awesome/database/migration"
 	"example.com/awesome/route"
+	"example.com/awesome/validator"
 	"flag"
 	"github.com/gin-gonic/gin"
 	"github.com/go-gormigrate/gormigrate/v2"
@@ -34,8 +35,10 @@ func main() {
 
 	default:
 		r := gin.Default()
+		validator.CustomValidatorRegistration()
 
 		route.UserRoutes(r)
+		route.AuthRoutes(r)
 
 		err := r.Run(":8080")
 		if err != nil {

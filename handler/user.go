@@ -34,3 +34,13 @@ func (h *UserHandler) GetUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, user)
 }
+
+func (h *UserHandler) GetUsers(c *gin.Context) {
+	users, err := h.UserService.GetUsers()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+	}
+
+	c.JSON(http.StatusOK, users)
+}
